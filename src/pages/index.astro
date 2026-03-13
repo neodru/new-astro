@@ -1,5 +1,9 @@
 ---
+
 import Layout from "../layouts/Layout.astro";
+// src/pages/index.astro
+import { getStory } from '../lib/storyblok.js';
+const story = await getStory('home');
 ---
 
 <Layout>
@@ -20,6 +24,7 @@ import Layout from "../layouts/Layout.astro";
         <a href="#" class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-8 py-3 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50">
           Learn more
         </a>
+		<pre>{JSON.stringify(story, null, 2)}</pre>
       </div>
     </div>
   </main>
