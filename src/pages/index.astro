@@ -1,17 +1,26 @@
 ---
-
+import Layout from "../layouts/Layout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <main class="min-h-screen flex flex-col items-center justify-center px-6 py-16">
+    <div class="max-w-3xl text-center">
+      <p class="text-sm font-semibold uppercase tracking-wide text-sky-600">Launch faster</p>
+      <h1 class="mt-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+        Build your landing page with Astro + Tailwind
+      </h1>
+      <p class="mt-6 text-lg leading-relaxed text-slate-600">
+        Ship less JavaScript, get pixel-perfect styling, and deploy instantly on Vercel.
+      </p>
+
+      <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:justify-center">
+        <a href="#" class="inline-flex items-center justify-center rounded-full bg-sky-600 px-8 py-3 text-sm font-semibold text-white shadow hover:bg-sky-500">
+          Get started
+        </a>
+        <a href="#" class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-8 py-3 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50">
+          Learn more
+        </a>
+      </div>
+    </div>
+  </main>
+</Layout>
