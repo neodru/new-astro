@@ -1,0 +1,125 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import CTABanner from "../components/CTABanner.astro";
+
+const eventTypes = [
+  {
+    title: "Weddings & Ceremonies",
+    description:
+      "Say 'I do' against a backdrop of rolling hills and rustic ranch elegance. Our outdoor arenas and open grounds create a breathtaking setting for your ceremony and reception.",
+    image: "/images/events-wedding.jpg",
+    alt: "Outdoor wedding ceremony at Poway Equestrian Center with white chairs, floral arrangements, and golden California light",
+    imagePrompt: `Romantic outdoor wedding ceremony at a California ranch. White wooden chairs arranged in rows
+      along a petal-strewn aisle, large lush floral arrangements of cream and blush roses, a wooden arch
+      draped in greenery. Rolling chaparral hills visible in background, warm golden hour sunset light,
+      editorial wedding photography, dreamy bokeh.`,
+  },
+  {
+    title: "Corporate Events & Retreats",
+    description:
+      "Step away from the office and into a unique outdoor setting. Our venue is ideal for team-building days, executive retreats, and corporate gatherings that leave a lasting impression.",
+    image: "/images/events-corporate.jpg",
+    alt: "Corporate team-building event at the ranch with outdoor seating and the equestrian arena in the background",
+    imagePrompt: `Professional corporate outdoor team event at a rustic California ranch. Round tables with
+      linen tablecloths under string lights, a cleared arena in the background with well-maintained white rail
+      fencing, evening light, high-end event photography style, cinematic wide angle.`,
+  },
+  {
+    title: "Private Celebrations",
+    description:
+      "Birthdays, anniversaries, quinceañeras, family reunions — whatever the occasion, our venue provides a one-of-a-kind setting your guests will remember forever.",
+    image: "/images/events-private.jpg",
+    alt: "A private birthday celebration set up in the outdoor arena with festive decorations and string lights at dusk",
+    imagePrompt: `Festive outdoor private party at a California equestrian ranch at dusk. Round tables with
+      colorful centerpieces, warm string lights strung between fence posts, a chic rustic atmosphere,
+      laughter and celebration, shallow depth of field, candid editorial photography.`,
+  },
+];
+---
+
+<Layout
+  title="Event Venue | Poway Equestrian Center"
+  description="Host your wedding, corporate event, or private celebration at Poway Equestrian Center's rustic ranch venue in Poway, CA. Inquire at 858-748-6441."
+>
+  <Hero
+    headline={"An Unforgettable\nVenue"}
+    subheadline="Celebrate life's most meaningful moments against the backdrop of Poway's scenic ranch landscape — rustic, elegant, and truly one of a kind."
+    primaryBtnText="Inquire About Venue"
+    primaryBtnHref="/contact"
+    secondaryBtnText="Contact Us"
+    secondaryBtnHref="/contact"
+    minHeight="70vh"
+  />
+
+  <!-- Event Types -->
+  <section class="py-24 px-6 bg-cream">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="font-sans text-gold text-xs font-semibold uppercase tracking-[0.3em] mb-3">The Possibilities</p>
+        <h2 class="font-serif text-hunter text-4xl sm:text-5xl font-bold mb-4">Events We Host</h2>
+        <div class="w-16 h-0.5 bg-gold mx-auto"></div>
+      </div>
+      <div class="space-y-16">
+        {eventTypes.map((event, i) => (
+          <div class={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+            <div class={`relative ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
+              {/* DALL-E Prompt: {event.imagePrompt} */}
+              <img
+                src={event.image}
+                alt={event.alt}
+                class="w-full aspect-[4/3] object-cover"
+              />
+              <div class="absolute -bottom-4 -right-4 w-full h-full border border-gold/30 -z-10"></div>
+            </div>
+            <div class={i % 2 === 1 ? 'lg:order-1' : ''}>
+              <div class="w-12 h-0.5 bg-gold mb-6"></div>
+              <h3 class="font-serif text-hunter text-3xl font-bold mb-4">{event.title}</h3>
+              <p class="font-sans text-charcoal/70 text-base leading-relaxed mb-8">{event.description}</p>
+              <a
+                href="/contact"
+                class="inline-block font-sans text-sm font-semibold uppercase tracking-widest px-8 py-3 bg-hunter text-cream hover:bg-hunter-light transition-all duration-200"
+              >
+                Check Availability
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Venue highlights -->
+  <section class="py-24 px-6 bg-hunter">
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="font-sans text-gold text-xs font-semibold uppercase tracking-[0.3em] mb-4">Venue Features</p>
+      <h2 class="font-serif text-cream text-4xl font-bold mb-8">What's Included</h2>
+      <div class="w-16 h-0.5 bg-gold mx-auto mb-12"></div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
+        {[
+          "Two spacious outdoor arenas",
+          "Sweeping ranch landscape & natural backdrop",
+          "Flexible layout for various event sizes",
+          "Dedicated events coordination team",
+          "Ample parking for guests",
+          "Restroom facilities on site",
+          "Evening lighting setup options",
+          "Vendor-friendly open vendor policy",
+        ].map((feature) => (
+          <div class="flex items-center gap-3 p-4 border border-cream/10">
+            <span class="text-gold shrink-0">✦</span>
+            <span class="font-sans text-sm text-cream/70">{feature}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTABanner
+    headline="Let's Plan Your Event"
+    subtext="Contact our events team to check availability, discuss your vision, and start planning an unforgettable experience."
+    btnText="Inquire Now"
+    href="/contact"
+    variant="saddle"
+  />
+</Layout>

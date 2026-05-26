@@ -1,31 +1,326 @@
 ---
-
 import Layout from "../layouts/Layout.astro";
-// src/pages/index.astro
-import { getStory } from '../lib/storyblok.js';
-const story = await getStory('home');
+import Hero from "../components/Hero.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import CTABanner from "../components/CTABanner.astro";
+import TestimonialCard from "../components/TestimonialCard.astro";
+import FAQAccordion from "../components/FAQAccordion.astro";
+
+const services = [
+  {
+    title: "Horse Boarding",
+    description:
+      "We treat your horse like family. Our top-notch boarding facilities provide personalized care, two outdoor arenas, a wellness center, and 24/7 emergency support for complete peace of mind.",
+    href: "/boarding",
+    icon: "M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM9 22V12h6v10",
+  },
+  {
+    title: "Riding Lessons",
+    description:
+      "Whether you're taking your first step into the saddle or refining advanced techniques, our certified instructors tailor every lesson to your goals, pace, and riding discipline.",
+    href: "/lessons",
+    icon: "M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm-1-5h2v2h-2zm0-8h2v6h-2z",
+  },
+  {
+    title: "Professional Training",
+    description:
+      "Elevate your equestrian skills with our professional trainers. We cater to riders of all levels across a diverse range of disciplines, from Western pleasure to Hunter/Jumper.",
+    href: "/training",
+    icon: "M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2z",
+  },
+  {
+    title: "Trail Riding",
+    description:
+      "Explore the scenic trails of Poway with our guided trail riding experiences. Perfect for all skill levels, offering a serene connection with nature on horseback.",
+    href: "/lessons",
+    icon: "M3 6h18M3 12h18M3 18h18",
+  },
+  {
+    title: "Event Venue",
+    description:
+      "Host your dream wedding or corporate retreat at our rustic ranch. Two outdoor arenas, sweeping landscapes, and a dedicated events team create unforgettable experiences.",
+    href: "/events",
+    icon: "M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z",
+  },
+  {
+    title: "Farm Fresh Eggs",
+    description:
+      "Enjoy a taste of the ranch life with our farm-fresh eggs, available for purchase on-site. A small but delightful perk of life at Poway Equestrian Center. Only $3.50/carton.",
+    href: "/contact",
+    icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
+  },
+];
+
+const testimonials = [
+  {
+    quote:
+      "Poway Equestrian Center has transformed my riding completely. Nicole and the team are incredibly knowledgeable, patient, and genuinely passionate about horses. My confidence in the saddle has grown more in six months here than in years elsewhere.",
+    author: "Sarah M.",
+    location: "San Diego, CA",
+    role: "Adult Beginner Rider",
+  },
+  {
+    quote:
+      "We boarded our OTTB here for two years. The stalls are immaculate, the staff knows every horse by name, and the 24/7 emergency support gave us real peace of mind. Truly a facility that treats your horse like family.",
+    author: "James & Linda R.",
+    location: "Poway, CA",
+    role: "Full Board Clients",
+  },
+  {
+    quote:
+      "We held our wedding at Poway Equestrian Center and it was absolutely magical. The rustic ranch setting, the professional staff, and the breathtaking backdrop made it a day our guests still talk about.",
+    author: "Megan & Tyler K.",
+    location: "Rancho Bernardo, CA",
+    role: "Event Clients",
+  },
+];
+
+const faqItems = [
+  {
+    q: "Do you offer lessons for complete beginners?",
+    a: "Absolutely. We welcome riders of all levels, including those who have never been on a horse before. Our introductory lessons are designed to build confidence and establish safe fundamentals from the very first session.",
+  },
+  {
+    q: "What boarding options are available?",
+    a: "We offer full board and partial board packages, each including access to our two outdoor arenas, the wellness center, and 24/7 emergency support. Contact us for current pricing and availability.",
+  },
+  {
+    q: "Can I schedule a tour of the facility before committing?",
+    a: "Yes — we encourage it. Use the 'Book a Tour' button in the navigation or visit our contact page to schedule a free tour with one of our team members.",
+  },
+  {
+    q: "What disciplines do your trainers specialize in?",
+    a: "Our trainers cover a wide range of disciplines including Western pleasure, Hunter/Jumper, trail riding, and groundwork. We'll pair you with the right trainer based on your goals.",
+  },
+  {
+    q: "Is the facility available for private events and weddings?",
+    a: "Yes. Our rustic ranch venue is available for weddings, corporate events, and private gatherings. Reach out via our Events page to check availability and discuss your needs.",
+  },
+];
 ---
 
-<Layout>
-  <main class="min-h-screen flex flex-col items-center justify-center px-6 py-16">
-    <div class="max-w-3xl text-center">
-      <p class="text-sm font-semibold uppercase tracking-wide text-sky-600">Launch faster</p>
-      <h1 class="mt-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
-        Build your landing page with Astro + Tailwind
-      </h1>
-      <p class="mt-6 text-lg leading-relaxed text-slate-600">
-        Ship less JavaScript, get pixel-perfect styling, and deploy instantly on Vercel.
-      </p>
+<Layout
+  title="Poway Equestrian Center | Premier Horse Boarding, Lessons & Training"
+  description="Poway's premier equestrian facility — professional horse boarding, riding lessons, training, and event venue. Led by Nicole Stone. Call 858-748-6441."
+>
+  <!-- Hero -->
+  <Hero />
 
-      <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:justify-center">
-        <a href="#" class="inline-flex items-center justify-center rounded-full bg-sky-600 px-8 py-3 text-sm font-semibold text-white shadow hover:bg-sky-500">
-          Get started
-        </a>
-        <a href="#" class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-8 py-3 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50">
-          Learn more
-        </a>
-		<pre>{JSON.stringify(story, null, 2)}</pre>
+  <!-- Services Grid -->
+  <section class="py-24 px-6 bg-cream">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="font-sans text-gold text-xs font-semibold uppercase tracking-[0.3em] mb-3">
+          What We Offer
+        </p>
+        <h2 class="font-serif text-hunter text-4xl sm:text-5xl font-bold mb-4">
+          Our Services
+        </h2>
+        <div class="w-16 h-0.5 bg-gold mx-auto"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.map((service) => (
+          <ServiceCard
+            title={service.title}
+            description={service.description}
+            href={service.href}
+            icon={service.icon}
+          />
+        ))}
       </div>
     </div>
-  </main>
+  </section>
+
+  <!-- About Preview -->
+  <section class="py-24 px-6 bg-hunter">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <!-- Image side -->
+      <div class="relative">
+        {/* DALL-E / Midjourney Prompt:
+          Portrait photograph, professional editorial style. Nicole Stone, a confident San Diego
+          equestrian professional in her 40s, wearing a classic navy show jacket and tan breeches,
+          standing beside a well-groomed bay horse in a clean stable aisle with mahogany wood stalls.
+          Warm, directional stable lighting, shallow depth of field, cinematic color grade.
+        */}
+        <img
+          src="/images/nicole-stone.jpg"
+          alt="Nicole Stone, Director of Poway Equestrian Center, with a horse in the stable aisle"
+          class="w-full aspect-[4/5] object-cover"
+        />
+        <!-- Gold accent frame offset -->
+        <div class="absolute -bottom-4 -right-4 w-full h-full border border-gold/30 -z-10"></div>
+      </div>
+
+      <!-- Text side -->
+      <div>
+        <p class="font-sans text-gold text-xs font-semibold uppercase tracking-[0.3em] mb-4">
+          Our Story
+        </p>
+        <h2 class="font-serif text-cream text-4xl sm:text-5xl font-bold leading-tight mb-6">
+          Lifelong Passion,<br />Professional Care
+        </h2>
+        <div class="w-16 h-0.5 bg-gold mb-8"></div>
+        <p class="font-sans text-cream/70 text-base leading-relaxed mb-6">
+          Led by San Diego native <strong class="text-cream font-semibold">Nicole Stone</strong>, a lifelong rider who champions education, Poway Equestrian Center is more than a facility — it's a community built on the belief that horses and humans are better together.
+        </p>
+        <p class="font-sans text-cream/70 text-base leading-relaxed mb-6">
+          Our state-of-the-art grounds feature two outdoor arenas, a wellness center, and thoughtfully maintained stalls — all designed to help horses and riders reach their full potential.
+        </p>
+        <ul class="space-y-3 mb-10">
+          {[
+            "100% satisfaction guarantee",
+            "Two outdoor arenas & wellness center",
+            "24/7 boarding emergency support",
+            "Trainers across all major disciplines",
+          ].map((item) => (
+            <li class="flex items-center gap-3 font-sans text-sm text-cream/70">
+              <span class="text-gold text-base shrink-0">✦</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+        <a
+          href="/about"
+          class="inline-block font-sans text-sm font-semibold uppercase tracking-widest px-8 py-3 border border-gold text-gold hover:bg-gold hover:text-hunter transition-all duration-200"
+        >
+          Meet the Team
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <CTABanner
+    headline="Ready to Ride?"
+    subtext="Whether you're a first-time rider or a seasoned equestrian looking for a new home, we'd love to welcome you to Poway Equestrian Center."
+    btnText="Schedule a Lesson"
+    href="/contact"
+    variant="saddle"
+  />
+
+  <!-- Testimonials -->
+  <section class="py-24 px-6 bg-cream">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="font-sans text-gold text-xs font-semibold uppercase tracking-[0.3em] mb-3">
+          Hear From Our Community
+        </p>
+        <h2 class="font-serif text-hunter text-4xl sm:text-5xl font-bold mb-4">
+          What Our Clients Say
+        </h2>
+        <div class="w-16 h-0.5 bg-gold mx-auto"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {testimonials.map((t) => (
+          <TestimonialCard
+            quote={t.quote}
+            author={t.author}
+            location={t.location}
+            role={t.role}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Teaser -->
+  <section class="py-24 px-6 bg-cream-dark">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="font-sans text-gold text-xs font-semibold uppercase tracking-[0.3em] mb-3">
+          Life at the Center
+        </p>
+        <h2 class="font-serif text-hunter text-4xl sm:text-5xl font-bold mb-4">
+          Gallery
+        </h2>
+        <div class="w-16 h-0.5 bg-gold mx-auto"></div>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <!-- Image 1 -->
+        {/* DALL-E Prompt: Aerial drone shot, morning mist, two pristine white-railed outdoor arenas
+            at Poway Equestrian Center surrounded by California chaparral, golden light filtering
+            through eucalyptus trees. Cinematic, wide-angle, 4:3 aspect ratio. */}
+        <img
+          src="/images/gallery-arenas.jpg"
+          alt="Aerial view of the two outdoor arenas at Poway Equestrian Center surrounded by chaparral"
+          class="w-full aspect-square object-cover hover:opacity-90 transition-opacity duration-200"
+        />
+
+        <!-- Image 2 -->
+        {/* DALL-E Prompt: Close-up equestrian portrait, a teenage girl in a velvet show helmet
+            and beige breeches riding a chestnut horse over a cavaletti pole in a sunny outdoor arena.
+            Bokeh background, joyful expression, editorial quality, warm California light. */}
+        <img
+          src="/images/gallery-lesson.jpg"
+          alt="Young rider jumping a chestnut horse over a cavaletti in a sunny arena during a riding lesson"
+          class="w-full aspect-square object-cover hover:opacity-90 transition-opacity duration-200"
+        />
+
+        <!-- Image 3 -->
+        {/* DALL-E Prompt: Interior of a luxury horse stable, mahogany wood stalls with brass
+            fittings, clean shavings, warm hanging lanterns, a well-groomed grey horse looking
+            over its stall door. Architectural photography style, rich shadows, golden tones. */}
+        <img
+          src="/images/gallery-stables.jpg"
+          alt="Interior of the premium stables at Poway Equestrian Center with mahogany wood stalls and a grey horse"
+          class="w-full aspect-square object-cover hover:opacity-90 transition-opacity duration-200"
+        />
+
+        <!-- Image 4 -->
+        {/* DALL-E Prompt: Outdoor wedding ceremony at a rustic ranch, white wooden chairs in rows
+            flanking a petal-strewn aisle, two large bouquets of cream and blush roses at the altar,
+            California golden-hour light, rolling hills in the background. Editorial wedding photography. */}
+        <img
+          src="/images/gallery-wedding.jpg"
+          alt="Outdoor wedding ceremony at Poway Equestrian Center's rustic ranch with California golden-hour light"
+          class="w-full aspect-square object-cover hover:opacity-90 transition-opacity duration-200"
+        />
+
+        <!-- Image 5 -->
+        {/* DALL-E Prompt: Professional trainer in a show jacket working on groundwork with a dark
+            bay horse in a sand arena, horse in attentive posture, trainer using a dressage whip as a
+            signal. Action shot, shallow depth of field, late afternoon light. */}
+        <img
+          src="/images/gallery-training.jpg"
+          alt="Professional trainer working on groundwork with a dark bay horse in the sand arena"
+          class="w-full aspect-square object-cover hover:opacity-90 transition-opacity duration-200"
+        />
+
+        <!-- Image 6 -->
+        {/* DALL-E Prompt: Wide trail view, two riders on horseback walking single file along a
+            scenic dirt trail through Poway's rolling hills and coastal sage scrub, viewed from
+            behind, warm afternoon light, peaceful and cinematic. */}
+        <img
+          src="/images/gallery-trail.jpg"
+          alt="Two riders on horseback on a scenic trail through Poway's rolling hills at sunset"
+          class="w-full aspect-square object-cover hover:opacity-90 transition-opacity duration-200"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-24 px-6 bg-cream">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="font-sans text-gold text-xs font-semibold uppercase tracking-[0.3em] mb-3">
+          Common Questions
+        </p>
+        <h2 class="font-serif text-hunter text-4xl sm:text-5xl font-bold mb-4">
+          FAQs
+        </h2>
+        <div class="w-16 h-0.5 bg-gold mx-auto"></div>
+      </div>
+      <FAQAccordion items={faqItems} />
+      <div class="mt-12 text-center">
+        <p class="font-sans text-sm text-charcoal/60 mb-4">Still have questions?</p>
+        <a
+          href="/contact"
+          class="inline-block font-sans text-sm font-semibold uppercase tracking-widest px-8 py-3 bg-hunter text-cream hover:bg-hunter-light transition-all duration-200"
+        >
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </section>
 </Layout>

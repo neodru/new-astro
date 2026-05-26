@@ -1,0 +1,68 @@
+{
+  "name": "news",
+  "display_name": "News Article",
+  "schema": {
+    "title": {
+      "type": "text",
+      "pos": 0,
+      "display_name": "Article Title",
+      "required": true,
+      "description": "Headline used in listings and as the page <title>."
+    },
+    "excerpt": {
+      "type": "textarea",
+      "pos": 1,
+      "display_name": "Excerpt",
+      "required": true,
+      "description": "Short teaser shown in article cards and as the meta description (max ~160 chars)."
+    },
+    "body": {
+      "type": "richtext",
+      "pos": 2,
+      "display_name": "Article Body",
+      "required": true,
+      "description": "Full article content. Supports headings, images, links, lists."
+    },
+    "cover_image": {
+      "type": "asset",
+      "pos": 3,
+      "display_name": "Cover Image",
+      "filetypes": ["images"],
+      "description": "Hero image for the article. Recommended ratio: 16:9. Min 1200×675px."
+    },
+    "published_date": {
+      "type": "datetime",
+      "pos": 4,
+      "display_name": "Published Date",
+      "required": true,
+      "description": "Controls sort order (newest first) and the displayed date on the article."
+    },
+    "author": {
+      "type": "text",
+      "pos": 5,
+      "display_name": "Author Name",
+      "default_value": "Poway Equestrian Center",
+      "description": "Author display name shown below the title."
+    },
+    "category": {
+      "type": "option",
+      "pos": 6,
+      "display_name": "Category",
+      "source": "self",
+      "options": [
+        { "name": "Events",    "value": "Events" },
+        { "name": "Training",  "value": "Training" },
+        { "name": "Boarding",  "value": "Boarding" },
+        { "name": "Community", "value": "Community" },
+        { "name": "News",      "value": "News" }
+      ],
+      "description": "Content category used for filtering and badge display."
+    }
+  },
+  "color": "#D4AF37",
+  "icon": "block-text",
+  "preview_field": "title",
+  "is_root": true,
+  "is_nestable": false,
+  "real_name": "news"
+}

@@ -1,0 +1,117 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import CTABanner from "../components/CTABanner.astro";
+
+const lessonTypes = [
+  {
+    title: "Private Lessons",
+    duration: "60 minutes",
+    description:
+      "One-on-one sessions with a dedicated instructor focused entirely on your goals. Ideal for faster progression, building confidence, or working through specific challenges.",
+    icon: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8z",
+  },
+  {
+    title: "Group Lessons",
+    duration: "60 minutes",
+    description:
+      "A social, energetic environment with up to 4 riders per group. Learn alongside peers, absorb feedback from watching others, and enjoy the camaraderie of the equestrian community.",
+    icon: "M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M23 21v-2a4 4 0 0 1-3-3.87M16 3.13a4 4 0 0 1 0 7.75M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z",
+  },
+  {
+    title: "Introductory Package",
+    duration: "3 × 45-minute sessions",
+    description:
+      "New to riding? Our introductory package guides you through the basics of horsemanship, safety, and your first time in the saddle over three structured sessions.",
+    icon: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5",
+  },
+];
+
+const levels = [
+  { name: "Beginner", desc: "First time in the saddle through basic walk/trot control." },
+  { name: "Novice", desc: "Developing trot and canter skills, basic arena figures." },
+  { name: "Intermediate", desc: "Refining gaits, working on transitions and lateral movements." },
+  { name: "Advanced", desc: "Competition prep, advanced techniques, discipline-specific focus." },
+];
+---
+
+<Layout
+  title="Riding Lessons | Poway Equestrian Center"
+  description="Riding lessons for all levels in Poway, CA. Private & group lessons with certified instructors. Beginner to advanced. Call 858-748-6441 to book."
+>
+  <Hero
+    headline={"Learn to Ride\nWith Confidence"}
+    subheadline="From your very first step into the stirrup to advanced competition prep — our certified instructors meet you exactly where you are."
+    primaryBtnText="Book a Lesson"
+    primaryBtnHref="/contact"
+    secondaryBtnText="View Training"
+    secondaryBtnHref="/training"
+    minHeight="70vh"
+  />
+
+  <!-- Lesson Types -->
+  <section class="py-24 px-6 bg-cream">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="font-sans text-gold text-xs font-semibold uppercase tracking-[0.3em] mb-3">Formats</p>
+        <h2 class="font-serif text-hunter text-4xl sm:text-5xl font-bold mb-4">Lesson Options</h2>
+        <div class="w-16 h-0.5 bg-gold mx-auto"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {lessonTypes.map((lt) => (
+          <div class="bg-cream border border-cream-dark hover:border-gold/40 hover:shadow-lg transition-all duration-300 p-8">
+            <div class="h-1 bg-hunter w-12 mb-6"></div>
+            <h3 class="font-serif text-hunter text-xl font-bold mb-1">{lt.title}</h3>
+            <p class="font-sans text-gold text-xs font-semibold uppercase tracking-widest mb-4">{lt.duration}</p>
+            <p class="font-sans text-charcoal/70 text-sm leading-relaxed">{lt.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Skill Levels -->
+  <section class="py-24 px-6 bg-hunter">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <p class="font-sans text-gold text-xs font-semibold uppercase tracking-[0.3em] mb-4">All Abilities Welcome</p>
+        <h2 class="font-serif text-cream text-4xl font-bold leading-tight mb-6">
+          We Teach<br />Every Level
+        </h2>
+        <div class="w-16 h-0.5 bg-gold mb-8"></div>
+        <p class="font-sans text-cream/70 text-base leading-relaxed mb-8">
+          Our instructors are skilled at meeting riders where they are. Before your first lesson, we'll discuss your experience, goals, and any concerns to match you with the right program and instructor.
+        </p>
+        <div class="space-y-4">
+          {levels.map((level) => (
+            <div class="border-l-2 border-gold pl-5">
+              <p class="font-sans text-sm font-semibold text-cream">{level.name}</p>
+              <p class="font-sans text-sm text-cream/60 mt-0.5">{level.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="relative">
+        {/* DALL-E Prompt: Young woman in beige breeches and black riding boots receiving instruction
+            from a trainer beside her horse in a sunny California equestrian arena. The trainer points
+            at the horse's posture while the rider listens attentively. Warm afternoon light, cheerful
+            atmosphere, editorial style photography. */}
+        <img
+          src="/images/lesson-instruction.jpg"
+          alt="A rider receiving instruction from a certified trainer beside her horse in the outdoor arena"
+          class="w-full aspect-[4/3] object-cover"
+        />
+        <div class="absolute -bottom-4 -right-4 w-full h-full border border-gold/30 -z-10"></div>
+      </div>
+    </div>
+  </section>
+
+  <CTABanner
+    headline="Book Your First Lesson"
+    subtext="Ready to get started? Contact us to discuss which program is right for you and schedule your first session."
+    btnText="Contact Us to Book"
+    href="/contact"
+    variant="saddle"
+  />
+</Layout>

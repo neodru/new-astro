@@ -1,0 +1,71 @@
+{
+  "name": "service",
+  "display_name": "Service",
+  "schema": {
+    "name": {
+      "type": "text",
+      "pos": 0,
+      "display_name": "Service Name",
+      "required": true,
+      "description": "Short display name shown in cards and headings (e.g. \"Horse Boarding\")"
+    },
+    "slug": {
+      "type": "text",
+      "pos": 1,
+      "display_name": "URL Slug",
+      "required": true,
+      "description": "Internal link path (e.g. \"/boarding\"). Used by ServiceCard CTA."
+    },
+    "description": {
+      "type": "textarea",
+      "pos": 2,
+      "display_name": "Short Description",
+      "required": true,
+      "description": "1–2 sentences used on cards and meta description (max ~180 chars)."
+    },
+    "long_description": {
+      "type": "richtext",
+      "pos": 3,
+      "display_name": "Full Description",
+      "description": "Rich body copy rendered on the service's dedicated page."
+    },
+    "icon_path": {
+      "type": "text",
+      "pos": 4,
+      "display_name": "SVG Path (d attribute)",
+      "description": "The SVG path data string for the card icon. Paste only the value of the 'd' attribute from a 24×24 icon."
+    },
+    "cta_text": {
+      "type": "text",
+      "pos": 5,
+      "display_name": "CTA Button Label",
+      "default_value": "Learn More",
+      "description": "Label for the 'Learn More' link on the ServiceCard."
+    },
+    "cta_href": {
+      "type": "text",
+      "pos": 6,
+      "display_name": "CTA Link",
+      "description": "Destination URL for the card CTA (e.g. \"/boarding\")."
+    },
+    "featured_image": {
+      "type": "asset",
+      "pos": 7,
+      "display_name": "Featured Image",
+      "filetypes": ["images"],
+      "description": "Hero image used on the service's dedicated page."
+    },
+    "order": {
+      "type": "number",
+      "pos": 8,
+      "display_name": "Sort Order",
+      "default_value": 10,
+      "description": "Lower numbers appear first in the Services Grid (0 = first)."
+    }
+  },
+  "color": "#1B3022",
+  "icon": "block-table",
+  "preview_field": "name",
+  "is_root": false,
+  "is_nestable": true
+}

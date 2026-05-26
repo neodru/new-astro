@@ -1,0 +1,125 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CTABanner from "../../components/CTABanner.astro";
+import { getNewsStaticPaths, getNewsArticle } from "../../lib/storyblok.js";
+
+export async function getStaticPaths() {
+  return getNewsStaticPaths();
+}
+
+const { slug } = Astro.params;
+const story = await getNewsArticle(slug);
+
+// Redirect to news index if article not found.
+if (!story) {
+  return Astro.redirect("/news");
+}
+
+const article = story.content;
+
+function formatDate(iso) {
+  return new Date(iso).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+const categoryColors = {
+  Events:    "bg-hunter text-cream",
+  Training:  "bg-saddle text-cream",
+  Boarding:  "bg-gold text-hunter",
+  Community: "bg-hunter-light text-cream",
+  News:      "bg-charcoal text-cream",
+};
+const categoryClass = categoryColors[article.category] ?? "bg-charcoal text-cream";
+---
+
+<Layout title={`${article.title} | Poway Equestrian Center`} description={article.excerpt}>
+
+  <!-- Cover image hero -->
+  <section class="relative h-[55vh] min-h-72 overflow-hidden">
+    {/* DALL-E Prompt: (see article-specific cover_image alt text) */}
+    <img
+      src={article.cover_image?.filename ?? "/images/hero-arena.jpg"}
+      alt={article.cover_image?.alt ?? article.title}
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-hunter/90 via-hunter/40 to-transparent"></div>
+
+    <div class="absolute bottom-0 left-0 right-0 px-6 pb-12 max-w-4xl mx-auto">
+      <span class={`inline-block font-sans text-xs font-semibold uppercase tracking-widest px-2.5 py-1 mb-4 ${categoryClass}`}>
+        {article.category}
+      </span>
+      <h1 class="font-serif text-cream text-4xl sm:text-5xl font-bold leading-tight">{article.title}</h1>
+    </div>
+  </section>
+
+  <!-- Article body -->
+  <article class="py-16 px-6 bg-cream">
+    <div class="max-w-3xl mx-auto">
+
+      <!-- Meta row -->
+      <div class="flex items-center gap-4 mb-10 pb-8 border-b border-cream-dark">
+        <div class="w-9 h-9 bg-hunter flex items-center justify-center shrink-0">
+          <span class="font-serif text-gold text-sm">✦</span>
+        </div>
+        <div>
+          <p class="font-sans text-sm font-semibold text-hunter">{article.author}</p>
+          <time datetime={article.published_date} class="font-sans text-xs text-charcoal/40">
+            {formatDate(article.published_date)}
+          </time>
+        </div>
+      </div>
+
+      <!-- Excerpt (lead paragraph) -->
+      <p class="font-serif text-charcoal text-xl italic leading-relaxed mb-10">{article.excerpt}</p>
+
+      <!-- Rich text body -->
+      <!-- Storyblok richtext must be rendered with renderRichText() from @storyblok/js.
+           Import and call it here once your space is connected:
+           import { renderRichText } from "@storyblok/js";
+           <div set:html={renderRichText(article.body)} class="prose ..."></div>
+      -->
+      {article.body && (
+        <div
+          class="font-sans text-base text-charcoal/80 leading-relaxed space-y-6
+                 [&_h2]:font-serif [&_h2]:text-hunter [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-10 [&_h2]:mb-4
+                 [&_h3]:font-serif [&_h3]:text-hunter [&_h3]:text-xl [&_h3]:font-bold [&_h3]:mt-8 [&_h3]:mb-3
+                 [&_a]:text-gold [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-gold-light
+                 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-2
+                 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:space-y-2
+                 [&_blockquote]:border-l-2 [&_blockquote]:border-gold [&_blockquote]:pl-5
+                 [&_blockquote]:font-serif [&_blockquote]:italic [&_blockquote]:text-charcoal/70
+                 [&_img]:w-full [&_img]:my-8"
+        >
+          <p class="text-charcoal/40 text-sm italic">
+            [Article body will render here once Storyblok is connected and
+            <code>renderRichText(article.body)</code> is wired up.]
+          </p>
+        </div>
+      )}
+
+      <!-- Back link -->
+      <div class="mt-16 pt-8 border-t border-cream-dark">
+        <a
+          href="/news"
+          class="inline-flex items-center gap-2 font-sans text-sm font-semibold uppercase tracking-widest text-hunter hover:text-gold transition-colors duration-200"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          All Articles
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <CTABanner
+    headline="Questions? We're Here."
+    subtext="Reach out to our team for more information about our programs, facility, or upcoming events."
+    btnText="Contact Us"
+    href="/contact"
+    variant="saddle"
+  />
+</Layout>

@@ -1,0 +1,28 @@
+---
+interface Props {
+  quote: string;
+  author: string;
+  location?: string;
+  role?: string;
+}
+
+const { quote, author, location, role } = Astro.props;
+---
+
+<figure class="bg-cream border border-cream-dark p-8 flex flex-col gap-6 hover:border-gold/30 hover:shadow-lg transition-all duration-300">
+  <!-- Gold quotation mark -->
+  <span class="font-serif text-gold text-6xl leading-none select-none">&ldquo;</span>
+
+  <blockquote class="font-serif text-charcoal text-lg italic leading-relaxed flex-1 -mt-6">
+    {quote}
+  </blockquote>
+
+  <figcaption class="border-t border-cream-dark pt-5">
+    <p class="font-sans text-sm font-semibold text-hunter">{author}</p>
+    {(role || location) && (
+      <p class="font-sans text-xs text-charcoal/50 mt-0.5">
+        {role}{role && location && " &bull; "}{location}
+      </p>
+    )}
+  </figcaption>
+</figure>

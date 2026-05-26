@@ -1,0 +1,113 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import CTABanner from "../components/CTABanner.astro";
+
+const amenities = [
+  "Two fully maintained outdoor arenas",
+  "Equine wellness center on-site",
+  "Daily stall cleaning and fresh bedding",
+  "Premium quality hay and grain included",
+  "Personalized feeding schedules",
+  "Turnout management tailored to your horse",
+  "24/7 emergency support for boarding clients",
+  "On-site trail access for recreation",
+  "Farrier and vet coordination services",
+  "Farm-fresh environment with caring staff",
+];
+---
+
+<Layout
+  title="Horse Boarding | Poway Equestrian Center"
+  description="Premium full and partial horse boarding in Poway, CA. Personalized care, two outdoor arenas, wellness center, and 24/7 emergency support. Call 858-748-6441."
+>
+  <!-- Hero -->
+  <Hero
+    headline={"Premium Horse\nBoarding"}
+    subheadline="We treat your horse like family — personalized care, top-notch facilities, and 24/7 emergency support in the heart of Poway."
+    primaryBtnText="Inquire About Boarding"
+    primaryBtnHref="/contact"
+    secondaryBtnText="Tour the Facility"
+    secondaryBtnHref="/contact"
+    minHeight="70vh"
+  />
+
+  <!-- Intro -->
+  <section class="py-24 px-6 bg-cream">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <p class="font-sans text-gold text-xs font-semibold uppercase tracking-[0.3em] mb-4">Full & Partial Board</p>
+        <h2 class="font-serif text-hunter text-4xl font-bold leading-tight mb-6">
+          A Home Away<br />From Home
+        </h2>
+        <div class="w-16 h-0.5 bg-gold mb-8"></div>
+        <p class="font-sans text-charcoal/70 text-base leading-relaxed mb-4">
+          At Poway Equestrian Center, we understand that boarding your horse is one of the most important decisions you'll make. That's why we've built a facility where every detail — from stall design to feeding schedules — is thoughtfully managed.
+        </p>
+        <p class="font-sans text-charcoal/70 text-base leading-relaxed mb-8">
+          Our experienced team provides hands-on, personalized care every single day. Whether you choose full board or partial board, your horse will receive the attention, exercise, and love they deserve.
+        </p>
+        <a
+          href="/contact"
+          class="inline-block font-sans text-sm font-semibold uppercase tracking-widest px-8 py-3 bg-hunter text-cream hover:bg-hunter-light transition-all duration-200"
+        >
+          Request Pricing
+        </a>
+      </div>
+
+      <div class="relative">
+        {/* DALL-E Prompt: Interior of a luxury horse stable with mahogany wood stalls, brass name
+            plates, golden hanging lanterns, a well-groomed dark bay horse looking over the door,
+            clean shavings on the floor, warm light. Architectural interior photography, rich and warm. */}
+        <img
+          src="/images/boarding-stalls.jpg"
+          alt="Pristine mahogany wood stalls inside the Poway Equestrian Center stable with a horse looking over the door"
+          class="w-full aspect-[4/3] object-cover"
+        />
+        <div class="absolute -bottom-4 -left-4 w-full h-full border border-gold/30 -z-10"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Amenities -->
+  <section class="py-24 px-6 bg-hunter">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="font-sans text-gold text-xs font-semibold uppercase tracking-[0.3em] mb-3">Everything Included</p>
+        <h2 class="font-serif text-cream text-4xl sm:text-5xl font-bold mb-4">Boarding Amenities</h2>
+        <div class="w-16 h-0.5 bg-gold mx-auto"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+        {amenities.map((item) => (
+          <div class="flex items-start gap-3 p-5 border border-cream/10 hover:border-gold/30 transition-colors duration-200">
+            <span class="text-gold text-sm mt-0.5 shrink-0">✦</span>
+            <span class="font-sans text-sm text-cream/70">{item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Emergency callout -->
+  <section class="py-16 px-6 bg-cream-dark">
+    <div class="max-w-3xl mx-auto text-center">
+      <div class="inline-flex items-center gap-3 bg-cream border border-gold/30 px-8 py-6">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gold shrink-0">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.49 12 19.79 19.79 0 0 1 1.42 3.18 2 2 0 0 1 3.4 1h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.4a16 16 0 0 0 5.69 5.69l.76-.76a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 21 16.92z"/>
+        </svg>
+        <div class="text-left">
+          <p class="font-serif text-hunter text-lg font-bold">24/7 Emergency Support</p>
+          <p class="font-sans text-sm text-charcoal/60 mt-1">Our boarding staff is always on call for emergencies. Your horse's safety never sleeps. <a href="tel:8587486441" class="text-gold hover:underline font-medium">858-748-6441</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTABanner
+    headline="Give Your Horse the Best"
+    subtext="Contact us today to check availability, discuss options, and schedule a tour of our boarding facilities."
+    btnText="Inquire About Boarding"
+    href="/contact"
+    variant="saddle"
+  />
+</Layout>

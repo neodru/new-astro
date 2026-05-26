@@ -1,0 +1,118 @@
+---
+const siteLinks = [
+  { href: "/", label: "Home" },
+  { href: "/boarding", label: "Boarding" },
+  { href: "/training", label: "Training" },
+  { href: "/lessons", label: "Lessons" },
+  { href: "/events", label: "Events" },
+  { href: "/about", label: "About Us" },
+  { href: "/contact", label: "Contact" },
+];
+---
+
+<footer class="bg-hunter text-cream/80">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+
+      <!-- Brand column -->
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-gold text-xl">✦</span>
+          <div class="flex flex-col leading-none">
+            <span class="font-serif text-cream text-base font-bold tracking-wide">Poway Equestrian</span>
+            <span class="font-sans text-gold text-xs font-medium uppercase tracking-[0.15em]">Center</span>
+          </div>
+        </div>
+        <p class="font-sans text-sm leading-relaxed text-cream/60 mb-6 max-w-xs">
+          A premier equestrian facility dedicated to building lifelong bonds between horses and riders in the heart of Poway, California.
+        </p>
+        <!-- Social links -->
+        <div class="flex gap-4">
+          <a
+            href="https://www.facebook.com/SanDiegoTrailCompany"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-9 h-9 border border-cream/20 flex items-center justify-center hover:border-gold hover:text-gold transition-colors duration-200"
+            aria-label="Facebook"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+          <a
+            href="mailto:ride@powayequestriancenter.com"
+            class="w-9 h-9 border border-cream/20 flex items-center justify-center hover:border-gold hover:text-gold transition-colors duration-200"
+            aria-label="Email"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Site Links -->
+      <div>
+        <h4 class="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-gold mb-6">Quick Links</h4>
+        <ul class="space-y-3">
+          {siteLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="font-sans text-sm text-cream/60 hover:text-gold transition-colors duration-200"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Contact & Hours -->
+      <div>
+        <h4 class="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-gold mb-6">Contact & Hours</h4>
+        <address class="not-italic font-sans text-sm space-y-3 text-cream/60">
+          <p class="flex gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0 mt-0.5 text-gold">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span>14875 Mina de Oro Rd<br />Poway, CA 92064</span>
+          </p>
+          <p class="flex gap-3 items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0 text-gold">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.49 12 19.79 19.79 0 0 1 1.42 3.18 2 2 0 0 1 3.4 1h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.4a16 16 0 0 0 5.69 5.69l.76-.76a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 21 16.92z"/>
+            </svg>
+            <a href="tel:8587486441" class="hover:text-gold transition-colors">858-748-6441</a>
+          </p>
+          <p class="flex gap-3 items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0 text-gold">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            <a href="mailto:ride@powayequestriancenter.com" class="hover:text-gold transition-colors break-all">ride@powayequestriancenter.com</a>
+          </p>
+        </address>
+        <div class="mt-6 border-t border-cream/10 pt-6">
+          <p class="font-sans text-xs font-semibold uppercase tracking-widest text-gold mb-3">Hours</p>
+          <div class="font-sans text-sm text-cream/60 space-y-1">
+            <p>Mon – Fri: 9am – 5pm</p>
+            <p>Sat – Sun: 9am – 4pm</p>
+            <p class="text-gold/80 text-xs mt-2">24/7 boarding emergency support</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="mt-12 pt-8 border-t border-cream/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="font-sans text-xs text-cream/40">
+        &copy; {new Date().getFullYear()} Poway Equestrian Center. All rights reserved.
+      </p>
+      <p class="font-sans text-xs text-cream/40">
+        14875 Mina de Oro Rd, Poway, CA 92064
+      </p>
+    </div>
+  </div>
+</footer>

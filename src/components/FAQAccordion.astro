@@ -1,0 +1,30 @@
+---
+interface FAQItem {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  items: FAQItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="divide-y divide-cream-dark">
+  {items.map((item) => (
+    <details class="group py-1">
+      <summary class="flex items-center justify-between gap-4 py-5 cursor-pointer list-none font-sans font-medium text-hunter hover:text-gold transition-colors duration-200 select-none">
+        <span class="text-base">{item.q}</span>
+        <span class="shrink-0 w-6 h-6 border border-hunter/20 group-hover:border-gold flex items-center justify-center transition-colors duration-200 group-open:rotate-45 transition-transform">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+        </span>
+      </summary>
+      <div class="pb-6 pr-10">
+        <p class="font-sans text-sm text-charcoal/70 leading-relaxed">{item.a}</p>
+      </div>
+    </details>
+  ))}
+</div>

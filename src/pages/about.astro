@@ -1,0 +1,133 @@
+---
+import Layout from "../layouts/Layout.astro";
+import CTABanner from "../components/CTABanner.astro";
+
+const values = [
+  {
+    title: "Education First",
+    description:
+      "We believe every rider deserves to understand the 'why' behind every technique. Knowledge builds confidence, and confidence builds great riders.",
+  },
+  {
+    title: "Horse Welfare",
+    description:
+      "Every decision we make starts with the horse. Our facilities, schedules, and training methods are designed around the physical and emotional wellbeing of every animal in our care.",
+  },
+  {
+    title: "Community",
+    description:
+      "Poway Equestrian Center is more than a business — it's a gathering place for horse lovers. We cultivate a welcoming, supportive environment for riders of all backgrounds.",
+  },
+  {
+    title: "Excellence",
+    description:
+      "We hold ourselves to a high standard in everything: the cleanliness of our stalls, the skill of our instruction, and the professionalism of our events team.",
+  },
+];
+---
+
+<Layout
+  title="About Us | Poway Equestrian Center"
+  description="Learn about Poway Equestrian Center, led by San Diego native Nicole Stone. Our mission, values, and story — a premier equestrian facility in Poway, CA."
+>
+  <!-- Page header -->
+  <section class="relative py-32 px-6 bg-hunter overflow-hidden">
+    <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="font-sans text-gold text-xs font-semibold uppercase tracking-[0.3em] mb-4">Our Story</p>
+      <h1 class="font-serif text-cream text-5xl sm:text-6xl font-bold leading-tight mb-6">
+        About Poway<br />Equestrian Center
+      </h1>
+      <div class="w-16 h-0.5 bg-gold mx-auto mb-8"></div>
+      <p class="font-sans text-cream/70 text-lg leading-relaxed max-w-2xl mx-auto">
+        A community built on a lifelong love of horses, a commitment to education, and the belief that the bond between horse and rider is something truly special.
+      </p>
+    </div>
+  </section>
+
+  <!-- Nicole Stone profile -->
+  <section class="py-24 px-6 bg-cream">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div class="relative">
+        {/* DALL-E Prompt: Professional portrait, warm editorial lighting. Nicole Stone, a confident
+            and warm San Diego equestrian professional in her 40s, wearing a classic navy blazer,
+            standing in a well-lit stable aisle with a chestnut horse visible in the background.
+            Shallow depth of field, cinematic color grade, approachable and authoritative. */}
+        <img
+          src="/images/nicole-stone-portrait.jpg"
+          alt="Nicole Stone, founder and director of Poway Equestrian Center, in the stable aisle"
+          class="w-full aspect-[4/5] object-cover"
+        />
+        <div class="absolute -bottom-4 -right-4 w-full h-full border border-gold/30 -z-10"></div>
+      </div>
+
+      <div>
+        <p class="font-sans text-gold text-xs font-semibold uppercase tracking-[0.3em] mb-4">Meet Our Director</p>
+        <h2 class="font-serif text-hunter text-4xl font-bold leading-tight mb-2">Nicole Stone</h2>
+        <p class="font-sans text-gold text-sm font-semibold uppercase tracking-widest mb-6">Founder & Director</p>
+        <div class="w-16 h-0.5 bg-gold mb-8"></div>
+        <p class="font-sans text-charcoal/70 text-base leading-relaxed mb-4">
+          A San Diego native and lifelong rider, Nicole Stone has dedicated her life to the art and science of horsemanship. Growing up in Southern California, she developed a deep connection with horses at an early age — a passion that would shape her entire career.
+        </p>
+        <p class="font-sans text-charcoal/70 text-base leading-relaxed mb-4">
+          Nicole's approach to training and facility management is rooted in education. She believes that the best equestrians — and the happiest horses — are those who understand the principles behind every movement, every technique, and every interaction.
+        </p>
+        <p class="font-sans text-charcoal/70 text-base leading-relaxed mb-8">
+          Under her leadership, Poway Equestrian Center has become one of San Diego County's most respected equestrian facilities, offering a warm, professional environment that riders and horses alike are proud to call home.
+        </p>
+        <div class="inline-flex items-center gap-3 bg-cream-dark border border-cream-dark px-6 py-4">
+          <span class="text-gold text-2xl font-serif">"</span>
+          <p class="font-serif text-charcoal italic text-sm">
+            My goal has always been simple: to help riders and horses develop strong bonds so they can enjoy years of shared pleasure.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Values -->
+  <section class="py-24 px-6 bg-hunter">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="font-sans text-gold text-xs font-semibold uppercase tracking-[0.3em] mb-3">What We Stand For</p>
+        <h2 class="font-serif text-cream text-4xl sm:text-5xl font-bold mb-4">Our Core Values</h2>
+        <div class="w-16 h-0.5 bg-gold mx-auto"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {values.map((value) => (
+          <div class="p-8 border border-cream/10 hover:border-gold/30 transition-colors duration-300">
+            <span class="text-gold text-2xl font-serif block mb-4">✦</span>
+            <h3 class="font-serif text-cream text-xl font-bold mb-3">{value.title}</h3>
+            <p class="font-sans text-cream/60 text-sm leading-relaxed">{value.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Satisfaction guarantee -->
+  <section class="py-20 px-6 bg-cream-dark">
+    <div class="max-w-3xl mx-auto text-center">
+      <div class="inline-block border border-gold/40 px-12 py-10">
+        <div class="w-14 h-14 border border-gold flex items-center justify-center mx-auto mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-gold">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <h3 class="font-serif text-hunter text-2xl font-bold mb-3">100% Satisfaction Guarantee</h3>
+        <p class="font-sans text-charcoal/60 text-sm leading-relaxed max-w-md mx-auto">
+          We are so confident in the quality of our programs and facility that we offer a 100% satisfaction guarantee. If you're not completely satisfied, we'll work with you until you are.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CTABanner
+    headline="Come See It for Yourself"
+    subtext="Book a free tour of our facility and meet the team. We'd love to welcome you to the Poway Equestrian Center family."
+    btnText="Book a Free Tour"
+    href="/contact"
+    variant="saddle"
+  />
+</Layout>

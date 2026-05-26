@@ -1,0 +1,142 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CTABanner from "../../components/CTABanner.astro";
+import { getNewsArticles } from "../../lib/storyblok.js";
+
+const articles = await getNewsArticles();
+
+// Static placeholders shown when no Storyblok content exists yet.
+const placeholders = [
+  {
+    slug: "#",
+    content: {
+      title: "Welcome to the New Poway Equestrian Center Website",
+      excerpt: "We've launched a brand-new website to better serve our community. Explore our updated boarding, lessons, training, and events pages.",
+      published_date: "2026-03-01T00:00:00.000Z",
+      author: "Poway Equestrian Center",
+      category: "News",
+      cover_image: { filename: "/images/hero-arena.jpg", alt: "The outdoor arena at Poway Equestrian Center" },
+    },
+  },
+  {
+    slug: "#",
+    content: {
+      title: "Spring Riding Clinic — Registration Now Open",
+      excerpt: "Join us this spring for a two-day intensive clinic covering trail safety, arena fundamentals, and horse-rider communication. All levels welcome.",
+      published_date: "2026-02-15T00:00:00.000Z",
+      author: "Nicole Stone",
+      category: "Events",
+      cover_image: { filename: "/images/gallery-lesson.jpg", alt: "Rider in a spring clinic at Poway Equestrian Center" },
+    },
+  },
+  {
+    slug: "#",
+    content: {
+      title: "What to Look for When Choosing a Boarding Facility",
+      excerpt: "Not all boarding stables are created equal. Nicole Stone shares the five questions every horse owner should ask before signing a boarding contract.",
+      published_date: "2026-01-28T00:00:00.000Z",
+      author: "Nicole Stone",
+      category: "Boarding",
+      cover_image: { filename: "/images/boarding-stalls.jpg", alt: "Premium stalls at Poway Equestrian Center" },
+    },
+  },
+];
+
+const posts = articles.length > 0 ? articles : placeholders;
+
+function formatDate(iso) {
+  return new Date(iso).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+const categoryColors = {
+  Events:    "bg-hunter text-cream",
+  Training:  "bg-saddle text-cream",
+  Boarding:  "bg-gold text-hunter",
+  Community: "bg-hunter-light text-cream",
+  News:      "bg-charcoal text-cream",
+};
+---
+
+<Layout
+  title="News & Updates | Poway Equestrian Center"
+  description="Latest news, articles, and updates from Poway Equestrian Center — events, training tips, and community highlights."
+>
+  <!-- Page header -->
+  <section class="relative py-32 px-6 bg-hunter overflow-hidden">
+    <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="font-sans text-gold text-xs font-semibold uppercase tracking-[0.3em] mb-4">From the Ranch</p>
+      <h1 class="font-serif text-cream text-5xl sm:text-6xl font-bold leading-tight mb-6">News & Updates</h1>
+      <div class="w-16 h-0.5 bg-gold mx-auto mb-8"></div>
+      <p class="font-sans text-cream/70 text-lg leading-relaxed max-w-2xl mx-auto">
+        Events, training insights, community stories, and everything happening at Poway Equestrian Center.
+      </p>
+    </div>
+  </section>
+
+  <!-- Article grid -->
+  <section class="py-24 px-6 bg-cream">
+    <div class="max-w-7xl mx-auto">
+      {posts.length === 0 ? (
+        <p class="font-sans text-center text-charcoal/50 py-16">No articles published yet. Check back soon.</p>
+      ) : (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {posts.map((post) => {
+            const c = post.content;
+            const href = post.slug === "#" ? "#" : `/news/${post.slug}`;
+            const categoryClass = categoryColors[c.category] ?? "bg-charcoal text-cream";
+            return (
+              <article class="group flex flex-col bg-cream border border-cream-dark hover:border-gold/40 hover:shadow-xl transition-all duration-300">
+                {/* Cover image */}
+                <a href={href} class="block overflow-hidden aspect-video">
+                  {/* DALL-E Prompt: Editorial equestrian lifestyle photograph matching the article
+                      topic. Warm California light, cinematic composition, 16:9 aspect ratio. */}
+                  <img
+                    src={c.cover_image?.filename ?? "/images/hero-arena.jpg"}
+                    alt={c.cover_image?.alt ?? c.title}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </a>
+
+                <div class="p-6 flex flex-col flex-1">
+                  {/* Category badge */}
+                  <span class={`self-start font-sans text-xs font-semibold uppercase tracking-widest px-2.5 py-1 mb-4 ${categoryClass}`}>
+                    {c.category}
+                  </span>
+
+                  {/* Title */}
+                  <h2 class="font-serif text-hunter text-xl font-bold leading-snug mb-3 flex-1">
+                    <a href={href} class="hover:text-gold transition-colors duration-200">{c.title}</a>
+                  </h2>
+
+                  {/* Excerpt */}
+                  <p class="font-sans text-charcoal/60 text-sm leading-relaxed mb-5">{c.excerpt}</p>
+
+                  {/* Meta */}
+                  <div class="border-t border-cream-dark pt-4 flex items-center justify-between">
+                    <span class="font-sans text-xs text-charcoal/40">{c.author}</span>
+                    <time datetime={c.published_date} class="font-sans text-xs text-charcoal/40">
+                      {formatDate(c.published_date)}
+                    </time>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <CTABanner
+    headline="Stay in the Loop"
+    subtext="Follow us on Facebook or reach out directly for the latest news from the ranch."
+    btnText="Contact Us"
+    href="/contact"
+    variant="hunter"
+  />
+</Layout>

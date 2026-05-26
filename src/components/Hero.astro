@@ -1,0 +1,83 @@
+---
+interface Props {
+  headline?: string;
+  subheadline?: string;
+  primaryBtnText?: string;
+  primaryBtnHref?: string;
+  secondaryBtnText?: string;
+  secondaryBtnHref?: string;
+  minHeight?: string;
+}
+
+const {
+  headline = "Where Passion\nMeets Excellence",
+  subheadline = "Premier equestrian training, boarding, and events in the heart of Poway, California.",
+  primaryBtnText = "Explore Boarding",
+  primaryBtnHref = "/boarding",
+  secondaryBtnText = "Meet Our Trainers",
+  secondaryBtnHref = "/training",
+  minHeight = "100vh",
+} = Astro.props;
+---
+
+<section
+  class="relative flex items-center justify-center overflow-hidden"
+  style={`min-height: ${minHeight};`}
+>
+  {/* DALL-E / Midjourney Prompt:
+    Cinematic wide-angle photograph, golden hour light, a beautifully groomed outdoor equestrian
+    arena in Southern California. A rider in elegant black attire canters a dark bay Warmblood
+    horse past pristine white rail fencing. Rolling hills of Poway scrubland in the background,
+    eucalyptus trees silhouetted against an amber and rose sky. Shot on Phase One camera,
+    editorial quality, 16:9 aspect ratio, highly detailed, hyper-realistic.
+  */}
+  <img
+    src="/images/hero-arena.jpg"
+    alt="Rider cantering a bay horse through a sunlit outdoor arena at Poway Equestrian Center at golden hour"
+    class="absolute inset-0 w-full h-full object-cover"
+  />
+
+  <!-- Dark overlay -->
+  <div class="absolute inset-0 bg-gradient-to-b from-hunter/70 via-hunter/60 to-hunter/80"></div>
+
+  <!-- Gold accent line -->
+  <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+
+  <!-- Content -->
+  <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+    <p class="font-sans text-gold text-xs font-semibold uppercase tracking-[0.3em] mb-6">
+      Poway, California &bull; Est. Excellence
+    </p>
+    <h1 class="font-serif text-cream text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6">
+      {headline.split("\n").map((line, i) => (
+        <span>
+          {i > 0 && <br />}
+          {line}
+        </span>
+      ))}
+    </h1>
+    <p class="font-sans text-cream/75 text-lg sm:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
+      {subheadline}
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a
+        href={primaryBtnHref}
+        class="font-sans text-sm font-semibold uppercase tracking-widest px-10 py-4 bg-gold text-hunter hover:bg-gold-light transition-all duration-200 min-w-48 text-center"
+      >
+        {primaryBtnText}
+      </a>
+      <a
+        href={secondaryBtnHref}
+        class="font-sans text-sm font-semibold uppercase tracking-widest px-10 py-4 border border-cream/50 text-cream hover:border-gold hover:text-gold transition-all duration-200 min-w-48 text-center"
+      >
+        {secondaryBtnText}
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-cream/40">
+    <span class="font-sans text-xs uppercase tracking-widest">Scroll</span>
+    <div class="w-px h-10 bg-gradient-to-b from-cream/40 to-transparent"></div>
+  </div>
+</section>

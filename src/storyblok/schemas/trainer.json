@@ -1,0 +1,63 @@
+{
+  "name": "trainer",
+  "display_name": "Trainer",
+  "schema": {
+    "full_name": {
+      "type": "text",
+      "pos": 0,
+      "display_name": "Full Name",
+      "required": true,
+      "description": "Trainer's display name (e.g. \"Nicole Stone\")."
+    },
+    "title": {
+      "type": "text",
+      "pos": 1,
+      "display_name": "Title / Role",
+      "required": true,
+      "description": "Job title shown below the name (e.g. \"Head Trainer\", \"Youth Instructor\")."
+    },
+    "bio": {
+      "type": "textarea",
+      "pos": 2,
+      "display_name": "Short Bio",
+      "required": true,
+      "description": "2–3 sentence bio used on trainer cards and listing pages (max ~300 chars)."
+    },
+    "long_bio": {
+      "type": "richtext",
+      "pos": 3,
+      "display_name": "Full Biography",
+      "description": "Full rich-text biography displayed on the trainer's individual profile page."
+    },
+    "disciplines": {
+      "type": "array",
+      "pos": 4,
+      "display_name": "Disciplines",
+      "description": "List of riding disciplines this trainer specialises in (e.g. \"Hunter/Jumper\", \"Dressage\")."
+    },
+    "headshot": {
+      "type": "asset",
+      "pos": 5,
+      "display_name": "Headshot",
+      "filetypes": ["images"],
+      "description": "Portrait photo. Recommended ratio: 4:5 (portrait). Min 600×750px."
+    },
+    "years_experience": {
+      "type": "number",
+      "pos": 6,
+      "display_name": "Years of Experience",
+      "description": "Number of years the trainer has been working professionally."
+    },
+    "certifications": {
+      "type": "textarea",
+      "pos": 7,
+      "display_name": "Certifications & Credentials",
+      "description": "Comma-separated list of certifications (e.g. \"USEF 'R' Judge, USDF Bronze Medalist\")."
+    }
+  },
+  "color": "#784B24",
+  "icon": "block-person",
+  "preview_field": "full_name",
+  "is_root": false,
+  "is_nestable": true
+}

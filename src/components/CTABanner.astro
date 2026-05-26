@@ -1,0 +1,53 @@
+---
+interface Props {
+  headline: string;
+  subtext?: string;
+  btnText: string;
+  href: string;
+  variant?: "saddle" | "hunter" | "gold";
+}
+
+const { headline, subtext, btnText, href, variant = "saddle" } = Astro.props;
+
+const bgMap = {
+  saddle: "bg-saddle",
+  hunter: "bg-hunter",
+  gold: "bg-gold",
+};
+
+const textMap = {
+  saddle: "text-cream",
+  hunter: "text-cream",
+  gold: "text-hunter",
+};
+
+const btnMap = {
+  saddle: "bg-gold text-hunter hover:bg-gold-light",
+  hunter: "bg-gold text-hunter hover:bg-gold-light",
+  gold: "bg-hunter text-cream hover:bg-hunter-light",
+};
+
+const bg = bgMap[variant];
+const textColor = textMap[variant];
+const btnStyle = btnMap[variant];
+---
+
+<section class={`${bg} py-20 px-6`}>
+  <div class="max-w-4xl mx-auto text-center">
+    <span class={`font-sans text-xs font-semibold uppercase tracking-[0.3em] ${variant === 'gold' ? 'text-hunter/60' : 'text-cream/60'} block mb-4`}>
+      Get Started Today
+    </span>
+    <h2 class={`font-serif text-4xl sm:text-5xl font-bold ${textColor} mb-4`}>{headline}</h2>
+    {subtext && (
+      <p class={`font-sans text-lg leading-relaxed ${variant === 'gold' ? 'text-hunter/70' : 'text-cream/70'} mb-10 max-w-2xl mx-auto`}>
+        {subtext}
+      </p>
+    )}
+    <a
+      href={href}
+      class={`inline-block font-sans text-sm font-semibold uppercase tracking-widest px-12 py-4 ${btnStyle} transition-all duration-200`}
+    >
+      {btnText}
+    </a>
+  </div>
+</section>
